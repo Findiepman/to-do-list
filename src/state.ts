@@ -1,5 +1,5 @@
-import { item } from "./types";
-import { saveToStorage,loadFromStorage } from "./types";
+import { item } from "./types.js";
+import { saveToStorage,loadFromStorage } from "./types.js";
 
 export interface ItemState{
     items: item[];

@@ -1,5 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.elements = void 0;
-exports.elements = {};
+export const elements = {
+    gridItems: document.getElementById("todo-list"),
+    addItem: document.getElementById("add-btn"),
+    itemTask: document.getElementById("new-task"),
+};
 //# sourceMappingURL=elements.js.map

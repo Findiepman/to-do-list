@@ -1,11 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveToStorage = saveToStorage;
-exports.loadFromStorage = loadFromStorage;
-function saveToStorage(key, value) {
+export function saveToStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
-function loadFromStorage(key) {
+export function loadFromStorage(key) {
     const data = localStorage.getItem(key);
     if (!data)
         return null;

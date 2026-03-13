@@ -1,15 +1,21 @@
-import { saveTasks, state } from "./state"
+import { saveTasks, state } from "./state.js"
+import { render } from "./render.js"
 
-export function createItem(task: string) {
-    if (task) {
+
+export function createItem(name: String) {
+    const existingQuiz = state.items.find(task => task.task === name.toLocaleLowerCase())
+    if (!existingQuiz && name) {
         const newTask = {
-            task: task,
+            task: name,
             id: Date.now().toString()
         }
         state.items.push(newTask)
         saveTasks()
+        render()
     }
 }
-export function deleteItem(id: string) {
-    state.items.filter(h => h.id !== id)
+export function deleteItem(id: String) {
+    state.items = state.items.filter(h => h.id !== id)
+    saveTasks()
+    render()
 }

@@ -1,5 +1,5 @@
-import { elements } from "./elements";
-import { createItem } from "./create";
+import { elements } from "./elements.js";
+import { createItem } from "./create.js";
 
 elements.addItem.addEventListener("click", () => {
     if (elements.itemTask.value != "") {

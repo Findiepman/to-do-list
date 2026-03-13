@@ -1,12 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.state = void 0;
-exports.saveQuizzes = saveQuizzes;
-const types_1 = require("./types");
-exports.state = {
-    items: (0, types_1.loadFromStorage)("items") ?? []
+var _a;
+import { saveToStorage, loadFromStorage } from "./types.js";
+export const state = {
+    items: (_a = loadFromStorage("items")) !== null && _a !== void 0 ? _a : []
 };
-function saveQuizzes() {
-    (0, types_1.saveToStorage)("quizzes", exports.state.items);
+export function saveTasks() {
+    saveToStorage("items", state.items);
 }
 //# sourceMappingURL=state.js.map

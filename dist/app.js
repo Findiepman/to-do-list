@@ -1,5 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+import { render } from "./render.js";
 function initApp() {
+    render();
 }
+initApp();
+console.log("wefjewhlf");
 //# sourceMappingURL=app.js.map
