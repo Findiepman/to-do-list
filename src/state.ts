@@ -9,6 +9,6 @@ export const state: ItemState = {
     items: loadFromStorage<item[]>("items") ?? []
 }
 
-export function saveQuizzes() {
-    saveToStorage("quizzes", state.items)
+export function saveTasks() {
+    saveToStorage("items", state.items)
 }

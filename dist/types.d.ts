@@ -1,5 +1,4 @@
 export interface item {
-    name: String;
     id: String;
     task: String;
 }
