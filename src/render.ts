@@ -14,5 +14,12 @@ export function render() {
 
         input.type = "checkbox";
         
+        input.id = "t-1";
+        li.appendChild(input);
+
+        const label = document.createElement("label");
+        label.htmlFor = "t-1";
+        label.textContent = item;
+        li.appendChild(label);
     })
 }
