@@ -1,12 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveHabits = saveHabits;
-exports.loadHabits = loadHabits;
-function saveHabits() {
-    localStorage.setItem("habits", JSON.stringify(state.habits));
+exports.saveToStorage = saveToStorage;
+exports.loadFromStorage = loadFromStorage;
+function saveToStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
 }
-function loadHabits() {
-    const stored = localStorage.getItem("habits");
-    state.habits = stored ? JSON.parse(stored) : [];
+function loadFromStorage(key) {
+    const data = localStorage.getItem(key);
+    if (!data)
+        return null;
+    try {
+        return JSON.parse(data);
+    }
+    catch (error) {
+        console.error(`Error parsing storage key "${key}"`, error);
+        return null;
+    }
 }
 //# sourceMappingURL=types.js.map
