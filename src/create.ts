@@ -10,3 +10,6 @@ export function createItem(task: string) {
         saveTasks()
     }
 }
+export function deleteItem(id: string) {
+    state.items.filter(h => h.id !== id)
+}
