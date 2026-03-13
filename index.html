@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-do</title>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #f5f0e8;
+      --ink: #1a1a18;
+      --mid: #7a7570;
+      --rule: #d9d3c8;
+      --check: #3d6b4f;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Crimson Pro', Georgia, serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 4rem 1rem;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--mid);
+      margin-top: 0.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Input row ── */
+    .add-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .add-row input[type="text"] {
+      flex: 1;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--ink);
+      padding: 0.4rem 0;
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 1.1rem;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .add-row input[type="text"]::placeholder {
+      color: var(--mid);
+      font-style: italic;
+    }
+
+    .add-row button {
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      padding: 0.4rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .add-row button:hover {
+      background: var(--check);
+    }
+
+    /* ── List ── */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.75rem;
+    }
+
+    #todo-list {
+      list-style: none;
+    }
+
+    /*
+      Expected item structure for your JS:
+
+      <li class="todo-item">
+        <input type="checkbox" id="t-{id}">
+        <label for="t-{id}">
+          <span class="box"></span>
+          <span class="text">Task text</span>
+        </label>
+        <button class="delete">✕</button>
+      </li>
+    */
+
+    .todo-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .todo-item:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .todo-item input[type="checkbox"] {
+      display: none;
+    }
+
+    .todo-item label {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .box {
+      width: 14px;
+      height: 14px;
+      border: 1px solid var(--mid);
+      flex-shrink: 0;
+      position: relative;
+      top: 2px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .todo-item input[type="checkbox"]:checked + label .box {
+      border-color: var(--check);
+      background: var(--check);
+    }
+
+    .todo-item input[type="checkbox"]:checked + label .box::after {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: -1px;
+      width: 4px;
+      height: 8px;
+      border-right: 1.5px solid var(--cream);
+      border-bottom: 1.5px solid var(--cream);
+      transform: rotate(40deg);
+    }
+
+    .text {
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .todo-item input[type="checkbox"]:checked + label .text {
+      color: var(--mid);
+      text-decoration: line-through;
+      text-decoration-color: var(--mid);
+      font-style: italic;
+    }
+
+    .delete {
+      background: none;
+      border: none;
+      color: var(--rule);
+      font-size: 0.7rem;
+      cursor: pointer;
+      padding: 0 0.2rem;
+      line-height: 1;
+      transition: color 0.15s;
+    }
+
+    .delete:hover {
+      color: #8b3a2a;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+    }
+
+    /* update #item-count via JS */
+    #item-count {
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <h1>To-do</h1>
+      <p class="date" id="current-date"></p>
+    </header>
+
+    <div class="add-row">
+      <input type="text" id="new-task" placeholder="New task…">
+      <button id="add-btn">Add</button>
+    </div>
+
+    <p class="section-label">Tasks</p>
+    <ul id="todo-list"></ul>
+
+    <footer>
+      <span id="item-count">0</span> items remaining
+    </footer>
+
+  </div>
+
+  <!-- your script -->
+  <script src="todo.js"></script>
+</body>
+</html>
